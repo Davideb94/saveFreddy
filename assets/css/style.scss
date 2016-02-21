@@ -1,0 +1,44 @@
+$zombieColor: #27ae60;
+
+.slide{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    
+}
+
+.boxes{
+    position: relative;
+    height: 100%;
+    width: 50%;
+    float: left;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 40%;
+}
+
+#box1{
+    background-image: url("../svg/hearBreath.svg");
+    border-right: 1px solid #34495e;
+}
+
+#box2{
+    background-image: url("../svg/hearth.svg");
+}
+
+#flash{
+    background-color: pink;
+}
+
+#final{
+    height: 70%;
+    display: table;
+    text-align: center;
+    background-color: $zombieColor;
+}
+
+#saveMessage{
+    width: 10%;
+    display: table-cell;
+    vertical-align: middle;
+}
