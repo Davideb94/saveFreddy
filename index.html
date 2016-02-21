@@ -6,13 +6,28 @@
 -->
 <html>
 	<head>
-		<title>Big Picture by HTML5 UP</title>
+		<title>Save Freddy</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/styleYoutube.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<style type="text/css">
+
+		.container{
+			background: none;
+		}
+		.main.style1 .content{
+			position: absolute;
+			top: 40%;	
+			margin: auto;
+			left: 0;
+			right: 0;
+		}
+		
+		</style>
 	</head>
 	<body>
 
@@ -20,15 +35,13 @@
 			<header id="header">
 
 				<!-- Logo -->
-					<h1 id="logo">Big Picture</h1>
+					<h1 id="logo">Save Freddy</h1>
 
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
 							<li><a href="#intro">Intro</a></li>
-							<li><a href="#one">What I Do</a></li>
-							<li><a href="#two">Who I Am</a></li>
-							<li><a href="#work">My Work</a></li>
+							<li><a href="#one">Who's Freddy?</a></li>
 							<li><a href="#contact">Contact</a></li>
 						</ul>
 					</nav>
@@ -37,16 +50,14 @@
 
 		<!-- Intro -->
 			<section id="intro" class="main style1 dark fullscreen">
+				<div id="fullScreenVideo"></div>
 				<div class="content container 75%">
 					<header>
-						<h2>Hey.</h2>
+						<h2>Save Freddy!</h2>
 					</header>
-					<p>Welcome to <strong>Big Picture</strong> a responsive site template designed
-					by <a href="http://html5up.net">HTML5 UP</a>, built on <strong><a href="http://getskel.com">Skel</a></strong>,
-					and released for free under the <a href="http://html5up.net/license">Creative Commons Attribution 3.0 license</a>.</p>
-					<footer>
-						<a href="#one" class="button style2 down">More</a>
-					</footer>
+					<p>Welcome to SaveFreddy! A page to sensibilize kids on the importance of not having a zombie friend.
+					<br>by <a href="http://lenotta.com">Lenotta Team (ex MagentaTeam)</a> for Koding Hackaton.
+					
 				</div>
 			</section>
 
@@ -165,6 +176,15 @@
 			<script src="assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/jquery.youtubebackground.js"></script>
+			<script type="text/javascript">
+				
+
+				$('#fullScreenVideo').YTPlayer({
+				    fitToBackground: true,
+				    videoId: '8Fw3OyQbfRM'
+				});
+			</script>
 
 	</body>
 </html>
