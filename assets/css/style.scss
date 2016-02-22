@@ -1,5 +1,5 @@
 $zombieColor: #27ae60;
-
+$loseColor: #c0392b;
 .slide{
     position: relative;
     width: 100%;
@@ -36,7 +36,7 @@ $zombieColor: #27ae60;
 }
 
 #final{
-    height: 70%;
+    height: 100%;
     display: table;
     text-align: center;
     background-color: $zombieColor;
@@ -48,6 +48,14 @@ $zombieColor: #27ae60;
     vertical-align: middle;
     color: white;
 }
+
 .hide{
     opacity: 0;
+}
+
+#youLose{
+    height: 100%;
+    display: table;
+    text-align: center;
+    background-color: $loseColor;
 }
