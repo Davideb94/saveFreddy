@@ -12,12 +12,15 @@
   background-position: center center;
   background-size: 40%; }
 
-#box1 {
+#breathBox {
   background-image: url("../svg/hearBreath.svg");
   border-right: 1px solid #34495e; }
 
-#box2 {
+#hearthBox {
   background-image: url("../svg/hearth.svg"); }
+
+.red {
+  background-color: #c0392b; }
 
 #flash {
   background-repeat: no-repeat;
@@ -46,5 +49,11 @@
   display: table;
   text-align: center;
   background-color: #c0392b; }
+
+.reallyHide {
+  display: none; }
+
+body {
+  overflow: hidden; }
 
 /*# sourceMappingURL=style.css.map */

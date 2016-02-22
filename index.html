@@ -46,6 +46,9 @@
 			height: 10px;
 			position: absolute;
 		}
+		.overEverything{
+			z-index: 999;
+		}
 
 		</style>
 	</head>
@@ -62,7 +65,7 @@
 						<ul>
 							<li><a href="#intro">Intro</a></li>
 							<li><a href="#one">Who's Freddy?</a></li>
-							<li><a href="#contact">Contact</a></li>
+							<li><a href="#slide2">Reanimate Freddy!</a></li>
 						</ul>
 					</nav>
 
@@ -77,8 +80,10 @@
 					</header>
 					<p>Welcome to SaveFreddy! A page to sensibilize you on the importance of not having a zombie friend. <!-- or how to partecipate at Koding's hackathon with a project made 12 hrs before the deadline, because 3 out of 5 persons of your team dropped you. -->
 					<br>by <a href="http://lenotta.com">Lenotta Team (ex MagentaTeam)</a> for Koding Hackaton.
-					
+
 				</div>
+				<a href="#one" class="button style2 down anchored overEverything">Next</a>
+
 			</section>
 
 		<!-- One -->
@@ -99,11 +104,11 @@
 								</div>
 <!-- 								<button onclick="moveProgressBar()">Click Me</button>
  -->
-								<div class="boxes" id="box1">
+								<div class="boxes" id="breathBox">
 									<canvas id="breath">
 									</canvas>
 								</div>
-								<div class="boxes" id="box2"></div>
+								<div class="boxes" id="hearthBox"></div>
 			</section>
 
 		<!-- Work -->
@@ -243,6 +248,30 @@
 				} else {
 					console.log("getUserMedia not supported");
 				}
+			</script>
+			<script type="text/javascript">
+				
+				function addRedHearth(e) {
+				    e = e || window.event;
+
+				    if(e.keyCode==32){
+				    	e.preventDefault();
+				    	jQuery("#hearthBox").addClass("red");
+				    }
+				}
+
+				function removeRedHearth(e){
+					e = e || window.event;
+				    if(e.keyCode==32){
+
+					    e.preventDefault();
+				     	jQuery("#hearthBox").removeClass("red");
+
+				    }
+				}
+
+				document.onkeydown = addRedHearth;
+				document.onkeyup = removeRedHearth;
 			</script>
 			<a href="#final" id="finalGood" class="hide" ></a>
 
