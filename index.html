@@ -27,6 +27,11 @@
 			left: 0;
 			right: 0;
 		}
+		#breath{
+			width: 100%;
+			position: absolute;
+			bottom: 0;
+		}
 		
 		</style>
 	</head>
@@ -56,7 +61,7 @@
 					<header>
 						<h2>Save Freddy!</h2>
 					</header>
-					<p>Welcome to SaveFreddy! A page to sensibilize kids on the importance of not having a zombie friend.
+					<p>Welcome to SaveFreddy! A page to sensibilize kids on the importance of not having a zombie friend. <!-- or how to partecipate at Koding's hackathon with a project made 12 hrs before the deadline, because 3 out of 5 persons of your team dropped you. -->
 					<br>by <a href="http://lenotta.com">Lenotta Team (ex MagentaTeam)</a> for Koding Hackaton.
 					
 				</div>
@@ -66,18 +71,19 @@
 			<section id="one" class="main style2 right dark fullscreen">
 				<div class="content box style2">
 					<header>
-						<h2>What I Do</h2>
+						<h2>Who's Freddy?</h2>
 					</header>
-					<p>Lorem ipsum dolor sit amet et sapien sed elementum egestas dolore condimentum.
-					Fusce blandit ultrices sapien, in accumsan orci rhoncus eu. Sed sodales venenatis arcu,
-					id varius justo euismod in. Curabitur egestas consectetur magna.</p>
+					<p>Freddy is your friend. He usually drink a lot of sweet beverages and eat at fast foods, he doesn't like gymnastic and he loves to stay on the couch watching tv. Freddy is also your super athletic friend, who runs 35km per day and wear one of these technologic trackers. Freddy could be everyone.</p>
 				</div>
 				<a href="#two" class="button style2 down anchored">Next</a>
 			</section>
 
 		<!-- Two -->
 			<section id="slide2" class="slide">
-                <div class="boxes" id="box1"></div>
+                <div class="boxes" id="box1">
+                	<canvas id="breath">
+                	</canvas>
+                </div>
                 <div class="boxes" id="box2"></div>
 			</section>
 
@@ -108,7 +114,7 @@
 
 				<!-- Menu -->
 					<ul class="menu">
-						<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						<li>&copy; </li>
 					</ul>
 
 			</footer>
@@ -130,6 +136,64 @@
 				    fitToBackground: true,
 				    videoId: '8Fw3OyQbfRM'
 				});
+
+
+			</script>
+			<script type="text/javascript">
+				
+
+				navigator.getUserMedia = navigator.getUserMedia ||
+				  navigator.webkitGetUserMedia ||
+				  navigator.mozGetUserMedia;
+
+				if (navigator.getUserMedia) {
+				  navigator.getUserMedia({
+				      audio: true
+				    },
+				    function(stream) {
+				      audioContext = new AudioContext();
+				      analyser = audioContext.createAnalyser();
+				      microphone = audioContext.createMediaStreamSource(stream);
+				      javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+
+				      analyser.smoothingTimeConstant = 0.8;
+				      analyser.fftSize = 1024;
+
+				      microphone.connect(analyser);
+				      analyser.connect(javascriptNode);
+				      javascriptNode.connect(audioContext.destination);
+
+				      canvasContext = document.getElementById('breath');
+				      canvasContext = canvasContext.getContext("2d");
+
+				      javascriptNode.onaudioprocess = function() {
+				          var array = new Uint8Array(analyser.frequencyBinCount);
+				          analyser.getByteFrequencyData(array);
+				          var values = 0;
+
+				          var length = array.length;
+				          for (var i = 0; i < length; i++) {
+				            values += (array[i]);
+				          }
+
+				          var average = values / length;
+
+				          //console.log(Math.round(average - 40));
+
+				          canvasContext.clearRect(0, 0, 1000, 100);
+				          canvasContext.fillStyle = '#BadA55';
+				          canvasContext.fillRect(0, 100 - average, 1000, 100);
+				          // canvasContext.fillStyle = '#262626';
+				          // canvasContext.font = "48px impact";
+
+				        } // end fn stream
+				    },
+				    function(err) {
+				      console.log("The following error occured: " + err.name)
+				    });
+				} else {
+				  console.log("getUserMedia not supported");
+				}
 			</script>
 
 	</body>
