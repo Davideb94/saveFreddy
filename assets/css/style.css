@@ -26,7 +26,7 @@
   background-color: #333; }
 
 #final {
-  height: 70%;
+  height: 100%;
   display: table;
   text-align: center;
   background-color: #27ae60; }
@@ -36,5 +36,11 @@
   display: table-cell;
   vertical-align: middle;
   color: white; }
+
+#youLose {
+  height: 100%;
+  display: table;
+  text-align: center;
+  background-color: #c0392b; }
 
 /*# sourceMappingURL=style.css.map */
