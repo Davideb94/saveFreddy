@@ -17,7 +17,9 @@
   border-right: 1px solid #34495e; }
 
 #hearthBox {
-  background-image: url("../svg/hearth.svg"); }
+  background-image: url("../svg/hearth.svg");
+  text-align: center;
+  color: #c0392b; }
 
 .red {
   background-color: #c0392b; }
@@ -90,5 +92,12 @@ body {
   top: 15%;
   left: 10%;
   background-size: 150%; }
+
+#heartMessage {
+  padding: 10px; }
+
+#heartCounter {
+  padding: 10px;
+  font-size: 50px; }
 
 /*# sourceMappingURL=style.css.map */

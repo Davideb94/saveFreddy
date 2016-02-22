@@ -180,7 +180,10 @@
 				</div>
 			</section>
 			
-
+            <section class="slide">
+                <p></p>
+            </section>
+        
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.poptrox.min.js"></script>
@@ -261,7 +264,7 @@
 
 					if ( getMilliseconds() - game.lastMassage > 1000){
 						game.badFrequncyTimes++;
-						heartMessage("Faster");
+						heartMessage("<b>FASTER</b>");
 					}else{
 						heartMessage("");
 
@@ -273,7 +276,7 @@
 
 					if ( getMilliseconds() - game.lastMassage < 300){
 						game.badFrequncyTimes++;
-						heartMessage("Slower");
+						heartMessage("<b>SLOWER</b>");
 					}else{
 						heartMessage("");
 

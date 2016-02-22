@@ -25,6 +25,8 @@ $warningColor: #e67e22;
 
 #hearthBox{
     background-image: url("../svg/hearth.svg");
+    text-align: center;
+    color: $loseColor;
 }
 
 .red{
@@ -113,4 +115,13 @@ body{
     top: 15%;
     left: 10%;
     background-size: 150%;
+}
+
+#heartMessage{
+    padding: 10px;
+}
+
+#heartCounter{
+    padding: 10px;
+    font-size: 50px;
 }
