@@ -70,4 +70,18 @@ body {
 #finalBad {
   background-color: #c0392b; }
 
+.imageContainer {
+  position: relative;
+  width: 23%;
+  height: 60%;
+  border-radius: 50%;
+  float: left;
+  border: 5px solid white;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url("../../images/freddy.jpg");
+  background-size: 120%;
+  top: 15%;
+  left: 10%; }
+
 /*# sourceMappingURL=style.css.map */
