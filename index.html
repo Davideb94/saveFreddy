@@ -14,7 +14,7 @@
 		<link rel="stylesheet" href="assets/css/styleYoutube.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-        <link rel="stylesheet" href="assets/css/style.css">
+				<link rel="stylesheet" href="assets/css/style.css">
 		<style type="text/css">
 
 		.container{
@@ -33,6 +33,19 @@
 			bottom: 0;
 		}
 		
+		#myProgress {
+			width: 100%;
+			height: 10px;
+			position: relative;
+			background-color: #ddd;
+		}
+
+		#myBar {
+			background-color: #c23a2c;
+			width: 10px;
+			height: 10px;
+			position: absolute;
+		}
 		</style>
 	</head>
 	<body>
@@ -80,23 +93,28 @@
 
 		<!-- Two -->
 			<section id="slide2" class="slide">
-                <div class="boxes" id="box1">
-                	<canvas id="breath">
-                	</canvas>
-                </div>
-                <div class="boxes" id="box2"></div>
+								<div id="myProgress">
+										<div id="myBar"></div>
+								</div>
+								<button onclick="moveProgressBar()">Click Me</button>
+
+								<div class="boxes" id="box1">
+									<canvas id="breath">
+									</canvas>
+								</div>
+								<div class="boxes" id="box2"></div>
 			</section>
 
 		<!-- Work -->
 			<section id="flash" class="slide">
-				
+				<!-- Bolt -->
 			</section>
 
 		<!-- Contact -->
 			<section id="final" class="slide">
-                <div id="saveMessage">
-                    <h2>YOU SAVED<br>FREDDY!</h2>
-                </div>
+								<div id="saveMessage">
+										<h2>YOU SAVED<br>FREDDY!</h2>
+								</div>
 			</section>
 
 		<!-- Footer -->
@@ -133,8 +151,8 @@
 				
 
 				$('#fullScreenVideo').YTPlayer({
-				    fitToBackground: true,
-				    videoId: '8Fw3OyQbfRM'
+						fitToBackground: true,
+						videoId: '8Fw3OyQbfRM'
 				});
 
 
@@ -142,57 +160,81 @@
 			<script type="text/javascript">
 				
 
+				function moveProgressBar() {
+
+					var elem = document.getElementById("myBar");   
+					var width = 0;
+					var id = setInterval(manageProgressBar, 10);
+
+					function manageProgressBar() {
+
+						if (width == 100) {
+							clearInterval(id);
+							endTimerListener();
+						} else {
+							width++; 
+							elem.style.width = width + '%'; 
+						}
+					}
+					function endTimerListener(){
+						alert('PUPPA!!!!');
+					}
+
+				}
+			</script>
+			<script type="text/javascript">
+						
 				navigator.getUserMedia = navigator.getUserMedia ||
-				  navigator.webkitGetUserMedia ||
-				  navigator.mozGetUserMedia;
+					navigator.webkitGetUserMedia ||
+					navigator.mozGetUserMedia;
 
 				if (navigator.getUserMedia) {
-				  navigator.getUserMedia({
-				      audio: true
-				    },
-				    function(stream) {
-				      audioContext = new AudioContext();
-				      analyser = audioContext.createAnalyser();
-				      microphone = audioContext.createMediaStreamSource(stream);
-				      javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+					navigator.getUserMedia({
+							audio: true
+						},
+						function(stream) {
+							audioContext = new AudioContext();
+							analyser = audioContext.createAnalyser();
+							microphone = audioContext.createMediaStreamSource(stream);
+							javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
 
-				      analyser.smoothingTimeConstant = 0.8;
-				      analyser.fftSize = 1024;
+							analyser.smoothingTimeConstant = 0.8;
+							analyser.fftSize = 1024;
 
-				      microphone.connect(analyser);
-				      analyser.connect(javascriptNode);
-				      javascriptNode.connect(audioContext.destination);
+							microphone.connect(analyser);
+							analyser.connect(javascriptNode);
+							javascriptNode.connect(audioContext.destination);
 
-				      canvasContext = document.getElementById('breath');
-				      canvasContext = canvasContext.getContext("2d");
+							canvasContext = document.getElementById('breath');
+							canvasContext = canvasContext.getContext("2d");
 
-				      javascriptNode.onaudioprocess = function() {
-				          var array = new Uint8Array(analyser.frequencyBinCount);
-				          analyser.getByteFrequencyData(array);
-				          var values = 0;
+							javascriptNode.onaudioprocess = function() {
+									var array = new Uint8Array(analyser.frequencyBinCount);
+									analyser.getByteFrequencyData(array);
+									var values = 0;
 
-				          var length = array.length;
-				          for (var i = 0; i < length; i++) {
-				            values += (array[i]);
-				          }
+									var length = array.length;
+									for (var i = 0; i < length; i++) {
+										values += (array[i]);
+									}
 
-				          var average = values / length;
+									var average = values / length;
 
-				          //console.log(Math.round(average - 40));
+									//console.log(Math.round(average - 40));
 
-				          canvasContext.clearRect(0, 0, 1000, 100);
-				          canvasContext.fillStyle = '#BadA55';
-				          canvasContext.fillRect(0, 100 - average, 1000, 100);
-				          // canvasContext.fillStyle = '#262626';
-				          // canvasContext.font = "48px impact";
+									canvasContext.clearRect(0, 0, 1000, 100);
+									canvasContext.fillStyle = '#BadA55';
+									canvasContext.fillRect(0, 100 - average, 1000, 100);
+									// canvasContext.fillStyle = '#262626';
+									// canvasContext.font = "48px impact";
 
-				        } // end fn stream
-				    },
-				    function(err) {
-				      console.log("The following error occured: " + err.name)
-				    });
+								} // end fn stream
+						},
+						function(err) {
+							console.log("The following error occured: " + err.name)
+						});
 				} else {
-				  console.log("getUserMedia not supported");
+					console.log("getUserMedia not supported");
 				}
 			</script>
 

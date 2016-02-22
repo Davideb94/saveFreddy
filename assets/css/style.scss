@@ -27,7 +27,12 @@ $zombieColor: #27ae60;
 }
 
 #flash{
-    background-color: pink;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url("../svg/bolt.svg");
+    
+    background-color: #333;
+    height: 300vh;
 }
 
 #final{
@@ -41,4 +46,5 @@ $zombieColor: #27ae60;
     width: 10%;
     display: table-cell;
     vertical-align: middle;
+    color: white;
 }
