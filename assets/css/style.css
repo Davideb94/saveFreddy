@@ -20,7 +20,10 @@
   background-image: url("../svg/hearth.svg"); }
 
 #flash {
-  background-color: pink; }
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url("../svg/bolt.svg");
+  background-color: #333; }
 
 #final {
   height: 70%;
@@ -31,6 +34,7 @@
 #saveMessage {
   width: 10%;
   display: table-cell;
-  vertical-align: middle; }
+  vertical-align: middle;
+  color: white; }
 
 /*# sourceMappingURL=style.css.map */
