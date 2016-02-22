@@ -22,20 +22,23 @@
 .red {
   background-color: #c0392b; }
 
-#flash {
+#bolt {
   background-repeat: no-repeat;
   background-position: center center;
   background-image: url("../svg/bolt.svg");
   background-color: #333;
   height: 300vh; }
 
-#final {
+.centeredContent {
   height: 100%;
   display: table;
   text-align: center;
   background-color: #27ae60; }
 
-#saveMessage {
+#warning {
+  background-color: #e67e22; }
+
+.saveMessage {
   width: 10%;
   display: table-cell;
   vertical-align: middle;
@@ -44,22 +47,24 @@
 .hide {
   opacity: 0; }
 
-#youLose {
-  height: 100%;
-  display: table;
-  text-align: center;
-  background-color: #c0392b; }
-
 .reallyHide {
   display: none; }
 
 body {
   overflow: hidden; }
 
-#warning {
+#explanation {
+  background-color: rgba(0, 0, 0, 0.8);
   height: 100%;
-  display: table;
-  text-align: center;
-  background-color: #e67e22; }
+  width: 100%;
+  position: absolute;
+  color: white; }
+
+.opaque {
+  filter: blur(10px);
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  -o-filter: blur(10px);
+  -ms-filter: blur(10px); }
 
 /*# sourceMappingURL=style.css.map */

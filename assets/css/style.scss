@@ -30,7 +30,8 @@ $warningColor: #e67e22;
 .red{
     background-color: #c0392b;
 }
-#flash{
+
+#bolt{
     background-repeat: no-repeat;
     background-position: center center;
     background-image: url("../svg/bolt.svg");
@@ -39,14 +40,18 @@ $warningColor: #e67e22;
     height: 300vh;
 }
 
-#final{
+.centeredContent{
     height: 100%;
     display: table;
     text-align: center;
     background-color: $zombieColor;
 }
 
-#saveMessage{
+#warning{
+    background-color: $warningColor;
+}
+
+.saveMessage{
     width: 10%;
     display: table-cell;
     vertical-align: middle;
@@ -57,13 +62,6 @@ $warningColor: #e67e22;
     opacity: 0;
 }
 
-#youLose{
-    height: 100%;
-    display: table;
-    text-align: center;
-    background-color: $loseColor;
-}
-
 .reallyHide{
     display: none;
 }
@@ -72,9 +70,19 @@ body{
     overflow: hidden;
 }
 
-#warning{
+
+#explanation{
+    background-color: rgba(0,0,0,0.8);
     height: 100%;
-    display: table;
-    text-align: center;
-    background-color: $warningColor;
+    width: 100%;
+    position: absolute;
+    color:white;
+}
+
+.opaque{
+    filter: blur(10px);
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  -o-filter: blur(10px);
+  -ms-filter: blur(10px);
 }

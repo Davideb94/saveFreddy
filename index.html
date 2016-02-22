@@ -98,62 +98,58 @@
                 <a href="#warning" class="button style2 down anchored">Next</a>
 			</section>
         
-            <section id="warning" class="slide">
-				<div id="saveMessage">
+            <section id="warning" class="slide centeredContent">
+				<div class="saveMessage">
 						<h2>Oh no!</h2><br><p>Freddy just felt on the floor. He's pallid and is holding his left harm..<br>it seems like Freddy is having an<br><b>heart attack</b>!<br><br><b>GO RESCUE HIM</b><br>and save Freddy from becoming a zombie</p>
                         <a href="#reanimation" class="button style3 down anchored overEverything">Next</a>
                 </div>
 			</section>
 		<!-- Reanimation -->
 			<section id="reanimation" class="slide">
-								<div id="myProgress">
-										<div id="myBar"></div>
-								</div>
+				<div id="myProgress">
+						<div id="myBar"></div>
+				</div>
 <!-- 								<button onclick="moveProgressBar()">Click Me</button>
- -->
-								<div class="boxes" id="breathBox">
-									<canvas id="breath">
-									</canvas>
-								</div>
-								<div class="boxes" id="hearthBox"></div>
+-->
+				<div class="boxes" id="breathBox">
+					<canvas id="breath">
+					</canvas>
+				</div>
+				<div class="boxes" id="hearthBox"></div>
+				<div id="explanation" class="centeredContent">
+					
+					<div class="saveMessage">
+						<h2>Do you remember CPR?</h2>
+						<h3>Here is a quick recap:</h3>
+						<ul>
+							<li>30 massages at about 2 massages per second</li>
+							<li>2 breaths</li>
+							<li>Repeat until you find a ADE.</li>
+
+						</ul>
+						<button onclick="game.startGame()">SAVE FREDDY!</button>
+					</div>
+				</div>
 			</section>
 
 		<!-- Work -->
-			<section id="flash" class="slide">
+			<section id="bolt" class="slide">
 				<!-- Bolt -->
 			</section>
 
 		<!-- Contact -->
-			<section id="final" class="slide">
-				<div id="saveMessage">
-						<h2>YOU SAVED<br>FREDDY!</h2>
+			<section id="finalGood" class="slide centeredContent">
+				<div class="saveMessage">
+						<h2>YOU SAVED FREDDY!</h2>
 				</div>
 			</section>
 
-            <section id="youLose" class="slide">
-				<div id="saveMessage">
-						<h2>FREDDY NOW<br>WANTS TO EAT<br>BRAINS!</h2>
+            <section id="finalBad" class="slide centeredContent">
+				<div class="saveMessage">
+						<h2>FREDDY NOW WANTS TO EAT<br>BRAAAAAINS!</h2>
 				</div>
 			</section>
-		<!-- Footer -->
-			<footer id="footer">
-
-				<!-- Icons -->
-					<ul class="actions">
-						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
-						<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-						<li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
-						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-					</ul>
-
-				<!-- Menu -->
-					<ul class="menu">
-						<li>&copy; </li>
-					</ul>
-
-			</footer>
+			
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
@@ -174,32 +170,180 @@
 				});
 
 
+
+
+			</script>
+			<script type="text/javascript">
+				
+				var game = {};
+				game.running = false;
+
+				game.startGame = function(){
+					game.breaths = 0;
+					game.massages = 0;
+					game.step = 0;
+					game.rightFrequency = true;
+					game.badFrequncyTimes = 0;
+					game.lastMassage = 0;
+					game.massageInterval = '';
+					game.running = true;
+
+					hideExplanation();
+					progressBar.startTimer();
+					game.startMassage();
+
+				}
+
+
+
+				game.endGame = function(){
+
+					game.evaluateFrequency();
+
+					if( game.massages == 60 && game.breaths == 4 && game.rightFrequency ){
+						slideToGoodFinal();
+					}else{
+						slideToBadFinal();
+					}
+
+					game.running = false;
+					//evaluate
+
+				}
+
+				game.evaluateFrequency = function(){
+					if( game.badFrequncyTimes > 8 ){
+						game.rightFrequency = false;
+					}
+				}
+
+				game.checkLastMassage = function(){
+					if ( getMilliseconds() - game.lastMassage > 700 ){
+						game.badFrequncyTimes++;
+					}
+				}
+
+				function slideToGoodFinal(){
+
+					jQuery("#finalGoodLink").click();
+
+				}
+				function slideToBadFinal(){
+
+					jQuery("#finalBadLink").click();
+
+				}
+
+				game.startMassage = function(){
+					hideBreath();
+					game.massageInterval = setInterval( game.checkLastMassage, 500 );
+
+
+				}
+				
+				game.endMassage = function(){
+					game.step++;
+					clearInterval( game.massageInterval );
+
+					showBreath();
+					game.startBreath();
+				}
+				
+				game.startBreath = function(){
+					hideMassage();
+
+
+				}
+				
+				game.endBreath = function(){
+					game.step++;
+
+					if( game.step < 4){
+						showMassage();
+						hideBreath();
+						
+					}else{
+						game.endGame();
+					}
+				}
+
+				game.addBreath = function(){
+					if( game.step % 2 != 0){
+
+						game.breaths++;
+						if( game.breaths % 2 == 0 ){
+							game.endBreath();
+						}
+					}
+
+				}
+
+				game.addMassage = function(){
+
+					if( game.step % 2 == 0){
+						game.massages++;
+						game.lastMassage = getMilliseconds();
+
+						if( game.massages % 30 == 0){
+							if( game.step == 4 ){
+								game.endGame();
+							}else{
+								game.endMassage();
+							}
+						}
+					}
+				}
+
+				function getMilliseconds(){
+					var d = new Date();
+					return d.getMilliseconds();
+				}
+
+				function hideExplanation(){
+
+					$("#explanation").addClass("reallyHide");
+
+				}
+
+				function hideBreath(){
+					$("#breathBox").addClass("opaque");
+				}
+				function showBreath(){
+					$("#breathBox").removeClass("opaque");
+				}
+				function hideMassage(){
+					$("#hearthBox").addClass("opaque");
+				}
+				function showMassage(){
+					$("#hearthBox").removeClass("opaque");
+				}
+
 			</script>
 
 			<script type="text/javascript">
 				
+				var progressBar = {};
 
-				function moveProgressBar() {
+				progressBar.startTimer = function() {
 
-					var elem = document.getElementById("myBar");   
-					var width = 0;
-					var id = setInterval(manageProgressBar, 10);
+					progressBar.bar = document.getElementById("myBar");   
+					progressBar.width = 0;
+					progressBar.intervalId = setInterval(progressBar.manageProgressBar, 1000);
+				}
 
-					function manageProgressBar() {
+				progressBar.manageProgressBar = function() {
 
-						if (width == 100) {
-							clearInterval(id);
-							endTimerListener();
+						if ( progressBar.width == 100) {
+							clearInterval( progressBar.intervalId );
+							progressBar.endTimerListener();
 						} else {
-							width++; 
-							elem.style.width = width + '%'; 
+							progressBar.width++; 
+							progressBar.bar.style.width = progressBar.width + '%'; 
 						}
-					}
-					function endTimerListener(){
-						// alert('PUPPA!!!!');
-						jQuery("#finalGood").click();
-					}
+				}
 
+				progressBar.endTimerListener = function(){
+					game.endGame();
 				}
 			</script>
 			<script type="text/javascript">
@@ -239,7 +383,12 @@
 									}
 
 									var average = values / length;
+									if( average > 110 && game.running ){
 
+										setTimeout( game.addBreath(), 1000 );
+										
+
+									}
 									//console.log(Math.round(average - 40));
 
 									canvasContext.clearRect(0, 0, 1000, 1000);
@@ -261,9 +410,10 @@
 				function addRedHearth(e) {
 				    e = e || window.event;
 
-				    if(e.keyCode==32){
+				    if(e.keyCode==32 && game.running && game.step % 2 == 0){
 				    	e.preventDefault();
 				    	jQuery("#hearthBox").addClass("red");
+				    	game.addMassage();
 				    }
 				}
 
@@ -280,7 +430,8 @@
 				document.onkeydown = addRedHearth;
 				document.onkeyup = removeRedHearth;
 			</script>
-			<a href="#final" id="finalGood" class="hide" ></a>
+			<a href="#finalGood" id="finalGoodLink" class="hide" ></a>
+			<a href="#finalBad" id="finalBadLink" class="hide" ></a>
 
 	</body>
 </html>
