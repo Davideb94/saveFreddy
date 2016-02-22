@@ -14,7 +14,7 @@
 		<link rel="stylesheet" href="assets/css/styleYoutube.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-				<link rel="stylesheet" href="assets/css/style.css">
+		<link rel="stylesheet" href="assets/css/style.css">
 		<style type="text/css">
 
 		.container{
@@ -66,6 +66,7 @@
 							<li><a href="#intro">Intro</a></li>
 							<li><a href="#one">Who's Freddy?</a></li>
 							<li><a href="#reanimation">Reanimate Freddy!</a></li>
+							<li><a href="#morale">Why?</a></li>
 						</ul>
 					</nav>
 
@@ -103,7 +104,7 @@
         
             <section id="warning" class="slide centeredContent">
 				<div class="saveMessage">
-						<h2>Oh no!</h2><br><p>Freddy just felt on the floor. He's pallid and is holding his left harm..<br>it seems like Freddy is having an<br><b>heart attack</b>!<br><br><b>GO RESCUE HIM</b><br>and save Freddy from becoming a zombie</p>
+						<h2>Oh no!</h2><br><p>Your friend Freddy just fell on the floor. He's pallid and is holding his left harm.<br>It seems like he is having an<br><b>heart attack</b>!<br><br><b>GO AND SAVE HIM</b><br>from becoming a zombie</p>
                         <a href="#reanimation" class="button style3 down anchored overEverything">Next</a>
                 </div>
 			</section>
@@ -133,6 +134,7 @@
 							<li>2 breaths ( blow in the mic )</li>
 
 						</ul>
+						<p>Sometimes it works on non-dead too...</p>
 						<button onclick="game.startGame()">SAVE FREDDY!</button>
 					</div>
 				</div>
@@ -140,13 +142,13 @@
 					
 					<div class="saveMessage">
                         <h2>Click the AED to reanimate Freddy</h2>
-						<img src="assets/svg/adeGreen.svg" height="200"/>
+						<img onclick="slideToGoodFinal()" src="assets/svg/adeGreen.svg" height="200"/>
 					</div>
 				</div>
 			</section>
 
 		<!-- Work -->
-			<section id="bolt" class="slide">
+			<section id="bolt" class="slide reallyHide">
 				<!-- Bolt -->
 			</section>
 
@@ -157,6 +159,8 @@
 						<p>He didn't like brains anyway...</p>
 
 				</div>
+				<a href="#morale" class="button style2 down anchored overEverything">Next</a>
+
 			</section>
 
             <section id="finalBad" class="slide centeredContent reallyHide">
@@ -165,6 +169,14 @@
 						<h2>FREDDY NOW WANTS TO EAT<br>BRAAAAAINS!</h2>
 						<p>You might find him more... attractive now...</p>
 						<a href="#reanimation"><button >Try Again</button></a>
+				</div>
+			</section>
+			<section id="morale" class="slide centeredContent">
+				<div class="saveMessage">
+
+					<p>Learning few little steps of the <b>CPR</b> procedure, and remembering them, can <b>save a Freddy's life</b>.<br> Freddy could be anyone, your friend, a stranger in the street, a kid at the beach.<br> It's just a matter of seconds, that can change someone's life. </p>
+					<br><br>
+					<h2>Be responsible.<br> Stay ready to save your beloved Freddy from becoming a zombie.</h2>
 				</div>
 			</section>
 			
@@ -215,6 +227,10 @@
 					game.massageInterval = '';
 					game.running = true;
 					$("#heartCounter").html("");
+					jQuery('#bolt').addClass('reallyHide');
+					jQuery('#finalGood').addClass('reallyHide');
+					jQuery('#finalBad').addClass('reallyHide');
+
 
 
 				}
@@ -224,7 +240,7 @@
 					game.evaluateFrequency();
 
 					if( game.massages == 60 && game.breaths == 4 && game.rightFrequency ){
-						slideToGoodFinal();
+						showAED();
 					}else{
 						slideToBadFinal();
 					}
@@ -266,8 +282,9 @@
 				}
 
 				function slideToGoodFinal(){
-                    
+                    hideAED();
                     jQuery('#finalGood').removeClass('reallyHide');
+                    jQuery('#bolt').removeClass('reallyHide');
 					jQuery("#finalGoodLink").click();
 				}
 				function slideToBadFinal(){
@@ -352,7 +369,19 @@
 
 					$("#explanation").removeClass("reallyHide");
 
+				}				
+				function hideAED(){
+
+					$("#aed").addClass("reallyHide");
+
+				}				
+				function showAED(){
+
+					$("#aed").removeClass("reallyHide");
+
 				}
+
+
 
 				function hideBreath(){
 					$("#breathBox").addClass("opaque");

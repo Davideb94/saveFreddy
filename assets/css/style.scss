@@ -52,7 +52,7 @@ $warningColor: #e67e22;
 }
 
 .saveMessage{
-    width: 10%;
+    width: 100%;
     display: table-cell;
     vertical-align: middle;
     color: white;
@@ -71,7 +71,7 @@ body{
 }
 
 
-#explanation,#aed{
+#explanation, #aed, #morale{
     background-color: rgba(0,0,0,0.8);
     height: 100%;
     width: 100%;
@@ -91,6 +91,14 @@ body{
     background-color: $loseColor;
 }
 
+#morale{
+    background-color: white;
+    color: #333;
+    .saveMessage{
+        color: #333;
+    }
+}
+
 .imageContainer{
     position: relative;
     width: 23%;
@@ -104,4 +112,5 @@ body{
     background-size: 120%;
     top: 15%;
     left: 10%;
+    background-size: 150%;
 }
