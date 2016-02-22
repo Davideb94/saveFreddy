@@ -56,4 +56,10 @@
 body {
   overflow: hidden; }
 
+#warning {
+  height: 100%;
+  display: table;
+  text-align: center;
+  background-color: #e67e22; }
+
 /*# sourceMappingURL=style.css.map */

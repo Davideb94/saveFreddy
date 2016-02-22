@@ -1,5 +1,6 @@
 $zombieColor: #27ae60;
 $loseColor: #c0392b;
+$warningColor: #e67e22;
 
 .slide{
     position: relative;
@@ -69,4 +70,11 @@ $loseColor: #c0392b;
 
 body{
     overflow: hidden;
+}
+
+#warning{
+    height: 100%;
+    display: table;
+    text-align: center;
+    background-color: $warningColor;
 }

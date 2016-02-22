@@ -458,6 +458,20 @@
 				background-image: url('images/arrow.svg');
 			}
 		}
+        
+        &.style3 {
+			background-color: transparent;
+			border: solid 2px #e5e6e7;
+			color: inherit;
+
+			&:hover {
+				background-color: rgba(145, 146, 147, 0.035);
+			}
+
+			&.down {
+				background-image: url('images/whiteArrow.svg');
+			}
+		}
 	}
 
 /* Box */
