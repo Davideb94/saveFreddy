@@ -115,7 +115,11 @@
 					<canvas id="breath">
 					</canvas>
 				</div>
-				<div class="boxes" id="hearthBox"></div>
+				<div class="boxes" id="hearthBox">
+					
+					<div id="heartMessage"></div>
+					<div id="heartCounter"></div>
+				</div>
 				<div id="explanation" class="centeredContent">
 					
 					<div class="saveMessage">
@@ -124,7 +128,6 @@
 						<ul>
 							<li>30 massages at about 2 massages per second</li>
 							<li>2 breaths</li>
-							<li>Repeat until you find a ADE.</li>
 
 						</ul>
 						<button onclick="game.startGame()">SAVE FREDDY!</button>
@@ -141,12 +144,15 @@
 			<section id="finalGood" class="slide centeredContent reallyHide">
 				<div class="saveMessage">
 						<h2>YOU SAVED FREDDY!</h2>
+						<p>He didn't like brains anyway...</p>
+
 				</div>
 			</section>
 
             <section id="finalBad" class="slide centeredContent reallyHide">
 				<div class="saveMessage">
 						<h2>FREDDY NOW WANTS TO EAT<br>BRAAAAAINS!</h2>
+						<p>You might find him more... attractive now...</p>
 				</div>
 			</section>
 			
@@ -212,15 +218,33 @@
 				}
 
 				game.evaluateFrequency = function(){
-					if( game.badFrequncyTimes > 8 ){
+					if( game.badFrequncyTimes > 10 ){
 						game.rightFrequency = false;
 					}
 				}
 
-				game.checkLastMassage = function(){
-					if ( getMilliseconds() - game.lastMassage > 700 ){
+				game.checkLastMassageSlow = function(){
+
+					if ( getMilliseconds() - game.lastMassage > 1000){
 						game.badFrequncyTimes++;
+						heartMessage("Faster");
+					}else{
+						heartMessage("");
+
 					}
+					 
+				}
+
+				game.checkLastMassageFast = function(){
+
+					if ( getMilliseconds() - game.lastMassage < 300){
+						game.badFrequncyTimes++;
+						heartMessage("Slower");
+					}else{
+						heartMessage("");
+
+					}
+
 				}
 
 				function slideToGoodFinal(){
@@ -237,9 +261,7 @@
 
 				game.startMassage = function(){
 					hideBreath();
-					game.massageInterval = setInterval( game.checkLastMassage, 500 );
-
-
+					game.massageInterval = setInterval( game.checkLastMassageSlow, 500 );
 				}
 				
 				game.endMassage = function(){
@@ -259,9 +281,9 @@
 				game.endBreath = function(){
 					game.step++;
 
-					if( game.step < 4){
+					if( game.step < 4 ){
 						showMassage();
-						hideBreath();
+						game.startMassage();
 						
 					}else{
 						game.endGame();
@@ -282,6 +304,8 @@
 				game.addMassage = function(){
 
 					if( game.step % 2 == 0){
+						game.checkLastMassageFast();
+						$("#heartCounter").html(game.massages+1);
 						game.massages++;
 						game.lastMassage = getMilliseconds();
 
@@ -297,7 +321,7 @@
 
 				function getMilliseconds(){
 					var d = new Date();
-					return d.getMilliseconds();
+					return d.valueOf();
 				}
 
 				function hideExplanation(){
@@ -319,6 +343,10 @@
 					$("#hearthBox").removeClass("opaque");
 				}
 
+				function heartMessage( message ){
+					$("#heartMessage").html(message);
+				}
+
 			</script>
 
 			<script type="text/javascript">
@@ -329,7 +357,7 @@
 
 					progressBar.bar = document.getElementById("myBar");   
 					progressBar.width = 0;
-					progressBar.intervalId = setInterval(progressBar.manageProgressBar, 500);
+					progressBar.intervalId = setInterval(progressBar.manageProgressBar, 600);
 				}
 
 				progressBar.manageProgressBar = function() {
