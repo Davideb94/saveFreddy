@@ -138,13 +138,13 @@
 			</section>
 
 		<!-- Contact -->
-			<section id="finalGood" class="slide centeredContent">
+			<section id="finalGood" class="slide centeredContent reallyHide">
 				<div class="saveMessage">
 						<h2>YOU SAVED FREDDY!</h2>
 				</div>
 			</section>
 
-            <section id="finalBad" class="slide centeredContent">
+            <section id="finalBad" class="slide centeredContent reallyHide">
 				<div class="saveMessage">
 						<h2>FREDDY NOW WANTS TO EAT<br>BRAAAAAINS!</h2>
 				</div>
@@ -224,12 +224,13 @@
 				}
 
 				function slideToGoodFinal(){
-
+                    
+                    jQuery('#finalGood').removeClass('reallyHide');
 					jQuery("#finalGoodLink").click();
-
 				}
 				function slideToBadFinal(){
-
+                    
+                    jQuery('#finalBad').removeClass('reallyHide');
 					jQuery("#finalBadLink").click();
 
 				}
@@ -328,7 +329,7 @@
 
 					progressBar.bar = document.getElementById("myBar");   
 					progressBar.width = 0;
-					progressBar.intervalId = setInterval(progressBar.manageProgressBar, 1000);
+					progressBar.intervalId = setInterval(progressBar.manageProgressBar, 500);
 				}
 
 				progressBar.manageProgressBar = function() {

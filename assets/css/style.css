@@ -67,4 +67,7 @@ body {
   -o-filter: blur(10px);
   -ms-filter: blur(10px); }
 
+#finalBad {
+  background-color: #c0392b; }
+
 /*# sourceMappingURL=style.css.map */

@@ -86,3 +86,7 @@ body{
   -o-filter: blur(10px);
   -ms-filter: blur(10px);
 }
+
+#finalBad{
+    background-color: $loseColor;
+}
